@@ -72,8 +72,8 @@ class ProductController extends Controller
                         $product->pwidth = $row['M'];
                         $product->pheight = $row['N'];
                         $product->pweight = $row['O'];
-                        $price = (float) $row['P']; // Assuming 'P' is the price column
-                        $salePrice = (float) $row['Q']; // Assuming 'Q' is the sale price column
+                        $price = (float) $row['P'];
+                        $salePrice = (float) $row['Q'];
 
                         if ($price != 0) {
                             $discountPercentage = (($price - $salePrice) / $price) * 100;
@@ -87,11 +87,8 @@ class ProductController extends Controller
                             $parentProduct = Product::where('sku', $parent_prod_sku)->first();
 
                             if ($parentProduct) {
-                                // If the product with the given SKU is found, set parent_product_id to its ID
                                 $product->parent_product_id = $parentProduct->id;
                             } else {
-                                // Handle the case where the product with the given SKU is not found
-                                // You might want to log an error or perform appropriate actions here
                                 $product->parent_product_id = null;
                             }
                         } else {
